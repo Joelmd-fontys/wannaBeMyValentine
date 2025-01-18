@@ -1,0 +1,75 @@
+
+body {
+    background:
+            linear-gradient(to top right, rgb(250, 128, 114), rgba(255, 165, 0, 0.66)) no-repeat;
+            url("grain_texture.jpg") repeat;
+    background-blend-mode: multiply;
+    height: 100vh;
+    text-align: center;
+    padding: 50px;
+}
+body::before {
+    content: "";
+    position: fixed; /* Stays in place behind everything */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("grain_texture.jpg") repeat;
+    background-size: 100%; /* Adjust as needed */
+    opacity: 0.05; /* Control how visible the noise is */
+    pointer-events: none; /* Don’t interfere with clicks */
+    z-index: -1; /* Place behind the body content */
+}
+
+/* Style for Text above */
+h1 {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #000000;
+}
+.romantic-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 2rem;
+    color: #000;
+}
+
+
+/* Full viewport overlay for the necklace + pendant */
+.necklace-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Generic chain styles */
+.chain {
+    position: absolute;
+    pointer-events: none; /* So content below remains clickable */
+
+    /* Adjust size for your chain image as needed */
+    width: 100vw; /* Example width; tweak to match your image ratio */
+    height: auto;
+    transform: translateX(-52%) translateY(-30%);
+    pointer-events: none;
+}
+/* The square pendant in the exact center */
+.pendant {
+    position: absolute;
+    bottom: 58.5%;
+    left: 50%;
+    transform: translateX(-60%);
+    width: 40px;  /* Adjust size as preferred */
+    height: 40px;
+    background-color: #e60073; /* Example color for the pendant square */
+    border: 2px solid #000;    /* Outline of the pendant */
+    z-index: 1;
+}
+
+
