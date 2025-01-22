@@ -34,54 +34,70 @@ body::before {
     color: #000;
 }
 
-
-/* Full viewport overlay for the necklace + pendant */
+/* Container for the chain and pendant, pinned at top, spanning full width */
 .necklace-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-
-.chain {
-    position: absolute;
-    pointer-events: none; /* So content below remains clickable */
-
-    /* Adjust size for your chain image as needed */
-    width: 100vw; /* Example width; tweak to match your image ratio */
+    position: relative;  /* Allows pendant absolute positioning */
+    width: 100vw;        /* Full viewport width */
     height: auto;
-    transform: translateX(-52%) translateY(-30%);
-    pointer-events: none;
+    overflow: hidden;    /* Prevents scrollbars from large images */
+    transform: translate(-10%, -35%);
 }
 
-.pendant-overlay{
-    background: none;
+/* Chain image: spans the full viewport width, maintaining aspect ratio */
+.chain {
+    display: block;
+    width: 100vw;
+    height: auto;
+}
+
+/* Pendant container is absolutely positioned within .necklace-container
+   so it appears below the chain. Adjust “top” to fine-tune alignment. */
+.pendant-container {
+    position: absolute;
+    top: 65%;   /* Example: place the pendant ~75% down from the top of the chain */
+    left: 51.5%;
+    transform: translate(-50.5%, 0);
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.5));
+    z-index: 1;
+}
+
+/* The heart pendant itself, using mask for the shape + gradient background.
+   Sizing uses viewport width so the pendant scales as the browser width changes. */
+.pendant-overlay {
+    -webkit-mask-image: url("heart.png");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: cover;
+    mask-image: url("heart.png");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: cover;
+
+    background: linear-gradient(
+            135deg,
+            #8b0000 0%,
+            #c71111 15%,
+            #ff8686 40%,
+            #c71111 65%,
+            #8b0000 100%
+    );
+
+    width: 12vw;                          /* Heart scales horizontally */
+    height: calc(12vw * (114 / 119));     /* Preserve aspect ratio of heart image */
+
     border: none;
     outline: none;
     cursor: pointer;
-    position: absolute;
-    bottom: 42.5vh;
-    left: 48.7vw;
-    transform: translateX(-50%) translateY(-50%);
-    width: 14vw;
-    height: 10vh;
-    background-image: url("heart.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 
+    /* Center any text inside the heart */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 2.5rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6vw;  /* Scale text by viewport width */
+    color: #fff;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
-
-
-
-
-
-
-
-
-
-
-
